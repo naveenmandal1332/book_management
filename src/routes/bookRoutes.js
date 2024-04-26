@@ -13,6 +13,4 @@ router.route('/book/:id').patch(isLoggedIn, updateBook);
 router.route('/book/:id').delete(isLoggedIn, deleteBooks);
 router.route('/book/fetch').post(isLoggedIn, fetchBooksByFilter);
 
-// router.route('/logout').get(logout);
-
 export default router;

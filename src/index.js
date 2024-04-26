@@ -19,7 +19,7 @@ import book from './routes/bookRoutes.js';
 app.use('/api', user);
 app.use('/api', book);
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running at port: ${port}`);
 });

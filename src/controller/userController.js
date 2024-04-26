@@ -67,6 +67,13 @@ const signin = async (req, res) => {
 // User logout:
 const logout = async (req, res) => {
   try {
+    if (!req.cookies.token || req.cookies.token === '') {
+      return res.status(200).json({
+        success: true,
+        message: 'User is already logged out!',
+      });
+    }
+
     res.cookie('token', null, {
       expires: new Date(Date.now()),
       http: true,
