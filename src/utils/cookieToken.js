@@ -8,7 +8,7 @@ const cookieToken = async (id) => {
     const token = jwt.sign({ id }, SECRET_KEY, { expiresIn: TOKEN_EXPIRY });
 
     const options = {
-      expires: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000),
+      expires: new Date(Date.now() + TOKEN_EXPIRY),
       httpOnly: true,
     };
 
