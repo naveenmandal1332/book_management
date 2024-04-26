@@ -5,7 +5,7 @@ const dbConfig = async () => {
     const { MONGODB_URL } = process.env;
     if (!MONGODB_URL) throw new Error('DB Url is empty!');
 
-    await mongoose.connect(MONGODB_URL);
+    await mongoose.connect(MONGODB_URL, { useNewUrlParser: true, useUnifiedTopology: true });
     console.info('Db connected successfully!');
   } catch (error) {
     console.error('DB Connection Error!');

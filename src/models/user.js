@@ -1,8 +1,5 @@
 import mongoose from 'mongoose';
 import validator from 'validator';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
-const { SECRET_KEY, TOKEN_EXPIRY } = process.env;
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -32,21 +29,5 @@ const userSchema = new mongoose.Schema({
 });
 
 const user = mongoose.model('User', userSchema);
-
-// Encrypt Password before save:
-userSchema.pre('save', async function (next) {
-  if (!this.isModified('password')) return next();
-  this.password = await bcrypt.hash(this.password, 10);
-});
-
-// Validate the user password:
-userSchema.methods.isValidatePassword = async function (userSendPassword) {
-  return await bcrypt.compare(userSendPassword, this.password);
-};
-
-// Create and return jwt token:
-userSchema.methods.getJwtToken = function () {
-  return jwt.sign({ id: this._id }, SECRET_KEY, { expiresIn: TOKEN_EXPIRY });
-};
 
 export default user;
